@@ -58,7 +58,7 @@ export class InspectCodeExecutor {
 			filePath
 		);
 
-		const cp = spawn(INSPECTION_COMMAND, args);
+		const cp = spawn(INSPECTION_COMMAND, args, { shell: true });
 
 		cp.stdin?.addListener('data', message => this.output.append(message.toString()));
 		cp.stdout?.addListener('data', message => this.output.append(message.toString()));

@@ -1,9 +1,9 @@
 {
 	"name": "resharpervscode",
-	"publisher": "ReSharper Community",
-	"displayName": "ResharperVSCode",
+	"publisher": "dev-land",
+	"displayName": "Resharper VSCode",
 	"description": "ReSharper features for Visual Studio Code",
-	"version": "0.4.3",
+	"version": "0.9.1",
 	"preview": true,
 	"icon": "assets/icon.png",
 	"repository": {
@@ -39,31 +39,31 @@
 		"commands": [
 			{
 				"command": "resharpervscode.inspectcode",
-				"title": "ReSharper: Inspect Code"
+				"title": "Resharper: Inspect Code"
 			},
 			{
 				"command": "resharpervscode.cleandiagnostics",
-				"title": "ReSharper: Clean Diagnostics"
+				"title": "Resharper: Clean Diagnostics"
 			},
 			{
 				"command": "resharpervscode.cleanalldiagnostics",
-				"title": "ReSharper: Clean All Diagnostics"
+				"title": "Resharper: Clean All Diagnostics"
 			},
 			{
 				"command": "resharpervscode.cleanupcode",
-				"title": "ReSharper: Cleanup Code"
+				"title": "Resharper: Cleanup Code"
 			},
 			{
 				"command": "resharpervscode.reloaddiagnostics",
-				"title": "ReSharper: Reload Diagnostics"
+				"title": "Resharper: Reload Diagnostics"
 			},
 			{
 				"command": "resharpervscode.dupfinder.run",
-				"title": "ReSharper: Run Dupfinder"
+				"title": "Resharper: Run Dupfinder"
 			},
 			{
 				"command": "resharpervscode.dupfinder.clean",
-				"title": "ReSharper: Clean Duplicates"
+				"title": "Resharper: Clean Duplicates"
 			}
 		],
 		"viewsContainers": {
@@ -114,7 +114,7 @@
 		},
 		"configuration": [
 			{
-				"title": "R# CLI Configuration",
+				"title": "ReSharper VSCode",
 				"properties": {
 					"resharpervscode.cleanupcode": {
 						"type": "object",

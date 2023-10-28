@@ -51,7 +51,7 @@ export class CleanupCodeExecutor {
 			filePath
 		);
 
-		const cp = spawn(CLEANCODE_COMMAND, args);
+		const cp = spawn(CLEANCODE_COMMAND, args, { shell: true });
 
 		cp.stdin?.addListener('data', message => this.output.append(message.toString()));
 		cp.stdout?.addListener('data', message => this.output.append(message.toString()));

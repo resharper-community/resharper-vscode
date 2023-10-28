@@ -58,7 +58,8 @@ export class DupfinderExecutor {
 		);
 
 		const cp = spawn(DUPFINDER_COMMAND, args, {
-			cwd: wd
+			cwd: wd,
+			shell: true
 		});
 
 		cp.stdin?.addListener('data', message => this.output.append(message.toString()));
