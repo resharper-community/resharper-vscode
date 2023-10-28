@@ -1,4 +1,4 @@
-# fakesharper**settings**
+# resharper-vscode
 
 This extension provides a wrapper for the R# CLI. The CLI executables are available as commands in the command pallette and any command line arguments can be configurable from the VS Code config files.
 
