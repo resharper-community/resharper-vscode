@@ -6,11 +6,11 @@ This extension is a fork of fakesharper
 
 ## Inspect Code
 
-![example](https://raw.githubusercontent.com/twounderscorez/resharpervscode/master/assets/example.gif)
+![example](https://raw.githubusercontent.com/resharper-community/resharper-vscode/master/assets/example.gif)
 
 ## Dupfinder
 
-![example](https://raw.githubusercontent.com/twounderscorez/resharpervscode/master/assets/dupfinder.gif)
+![example](https://raw.githubusercontent.com/resharper-community/resharper-vscode/master/assets/dupfinder.gif)
 
 ## Requirements
 
