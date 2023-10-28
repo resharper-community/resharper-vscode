@@ -1,7 +1,7 @@
 {
 	"name": "resharpervscode",
 	"publisher": "Resharper Community",
-	"displayName": "Resharper VSCode Extension",
+	"displayName": "ResharperVSCode",
 	"description": "ReSharper features for Visual Studio Code",
 	"version": "0.4.3",
 	"preview": true,
@@ -39,31 +39,31 @@
 		"commands": [
 			{
 				"command": "resharpervscode.inspectcode",
-				"title": "[Resharper] Inspect Code"
+				"title": "Resharper: Inspect Code"
 			},
 			{
 				"command": "resharpervscode.cleandiagnostics",
-				"title": "[Resharper] Clean Diagnostics"
+				"title": "Resharper: Clean Diagnostics"
 			},
 			{
 				"command": "resharpervscode.cleanalldiagnostics",
-				"title": "[Resharper] Clean All Diagnostics"
+				"title": "Resharper: Clean All Diagnostics"
 			},
 			{
 				"command": "resharpervscode.cleanupcode",
-				"title": "[Resharper] Cleanup Code"
+				"title": "Resharper: Cleanup Code"
 			},
 			{
 				"command": "resharpervscode.reloaddiagnostics",
-				"title": "[Resharper] Reload Diagnostics"
+				"title": "Resharper: Reload Diagnostics"
 			},
 			{
 				"command": "resharpervscode.dupfinder.run",
-				"title": "[Resharper] Run Dupfinder"
+				"title": "Resharper: Run Dupfinder"
 			},
 			{
 				"command": "resharpervscode.dupfinder.clean",
-				"title": "[Resharper] Clean Duplicates"
+				"title": "Resharper: Clean Duplicates"
 			}
 		],
 		"viewsContainers": {
