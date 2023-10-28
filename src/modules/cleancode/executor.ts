@@ -75,7 +75,7 @@ export class CleanupCodeExecutor {
 			}
 
 			vscode.window.showQuickPick(['No. Do not change my codes.', 'Yes. Cleanup my codes.'], {
-				placeHolder: 'WARNING! Your code will be modified by Resharper, continue?'
+				placeHolder: 'WARNING! Your code will be modified by ReSharper, continue?'
 			}).then(value => {
 				if (value && value.startsWith('Yes')) {
 					this.showStatusBarItem();
