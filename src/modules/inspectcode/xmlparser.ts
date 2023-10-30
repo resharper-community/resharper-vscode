@@ -8,6 +8,7 @@ import { IssueType, Issue, File } from "./models";
  * @param filePath Xml file path
  */
 export function parsefile(filePath: string): File[] {
+	const dir = path.dirname(filePath);
 	const xml: string = file.readFileSync(filePath);
 
 	const json: any = fxp.parse(xml, {
@@ -37,8 +38,10 @@ export function parsefile(filePath: string): File[] {
 	}
 
 	const addIssue = function (item: any): void {
+		const file = item.attributes["@_File"].replace(/\\/g, path.sep);
 		const issue: Issue = {
-			file: item.attributes["@_File"].replace(/\\/g, path.sep),
+			file: file,
+			fullPath: path.join(dir, file),
 			line: parseInt(item.attributes["@_Line"]),
 			message: item.attributes["@_Message"],
 			offset: {

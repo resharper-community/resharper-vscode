@@ -4,35 +4,45 @@ import * as path from "path";
 import * as vscode from "vscode";
 import { EXTENSION_DISPLAY_NAME, INSPECTION_FILENAME } from "../../constants";
 import { readFileSync } from '../../utils/file';
-import { File } from "./models";
+import { File, Issue } from "./models";
 import { getIssueRange, getIssueSeverity, restoreRelativePaths } from "./utils";
 import { findFiles } from '../../utils/workspace';
 import { parsefile } from "./xmlparser";
+import { InspectCodeTreeDataProvider } from "./tree";
 
-export function reloadAllDiagnostics(diagnosticCollection: vscode.DiagnosticCollection) {
+export function reloadAllDiagnostics(diagnosticCollection: vscode.DiagnosticCollection, dataProvider: InspectCodeTreeDataProvider) {
 	findFiles(`**/${INSPECTION_FILENAME}`)
 		.then(files => {
 			diagnosticCollection.clear();
 
+			let allIssues: Issue[] = [];
 			files.forEach((file) => {
-				loadDiagnostics(path.dirname(file.fsPath), diagnosticCollection);
+				const issues = loadDiagnostics(path.dirname(file.fsPath), diagnosticCollection);
+				allIssues.push(...issues);
 			});
+			dataProvider.dataSource = allIssues;
 		});
 }
 
-export function loadDiagnostics(basePath: string, diagnosticCollection: vscode.DiagnosticCollection): void {
+export function loadDiagnostics(basePath: string, diagnosticCollection: vscode.DiagnosticCollection): Issue[] {
 	const xmlPath = path.join(basePath, INSPECTION_FILENAME);
-
 	if (!fs.existsSync(xmlPath)) {
-		return;
+		return [];
 	}
 
 	try {
 		const files: File[] = parsefile(xmlPath);
 		restoreRelativePaths(basePath, files);
 		updateDiagnostics(files, diagnosticCollection);
+		let issues: Issue[] = [];
+		for (let i = 0; i < files.length; i++) {
+			const file: File = files[i];
+			issues.push(...file.issues);
+		}
+		return issues;
 	} catch (err) {
 		vscode.window.showErrorMessage(`${err?.message || err}`);
+		return [];
 	}
 }
 

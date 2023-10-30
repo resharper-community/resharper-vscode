@@ -8,6 +8,8 @@ import { Fragment } from './modules/dupfinder/models';
 import { DupfinderTreeDataProvider } from './modules/dupfinder/tree';
 import { JetBrainsInstaller } from './utils/jetbrainsinstaller';
 import { Config } from './modules/config';
+import { InspectCodeTreeDataProvider } from './modules/inspectcode/tree';
+import { Issue } from './modules/inspectcode/models';
 
 export function activate(context: vscode.ExtensionContext) {
 	const config = Config.getConfig();
@@ -22,14 +24,19 @@ export function activate(context: vscode.ExtensionContext) {
 	const output = vscode.window.createOutputChannel(EXTENSION_DISPLAY_NAME);
 	const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
 
-	const dataProvider = new DupfinderTreeDataProvider();
-
 	const jbInstaller = new JetBrainsInstaller(output);
 	jbInstaller.verifyInstallation();
 
-	const tree = vscode.window.createTreeView(`${EXTENSION_NAME}.dupfinder`, {
+	const dataProvider = new InspectCodeTreeDataProvider();
+	const tree = vscode.window.createTreeView(`${EXTENSION_NAME}.inspectcode`, {
 		canSelectMany: false,
 		treeDataProvider: dataProvider
+	});
+
+	const oldDataProvider = new DupfinderTreeDataProvider();
+	const oldTree = vscode.window.createTreeView(`${EXTENSION_NAME}.dupfinder`, {
+		canSelectMany: false,
+		treeDataProvider: oldDataProvider
 	});
 
 	let disposableShowOutput = vscode.commands.registerCommand(`${EXTENSION_NAME}.showoutput`, () => {
@@ -37,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	let disposable = vscode.commands.registerCommand(`${EXTENSION_NAME}.inspectcode`, () => {
-		new InspectCodeExecutor(output, statusBarItem, diagnosticCollection).run();
+		new InspectCodeExecutor(output, statusBarItem, diagnosticCollection, dataProvider).run();
 	});
 
 	let disposable2 = vscode.commands.registerTextEditorCommand(`${EXTENSION_NAME}.cleandiagnostics`, (textEditor) => {
@@ -49,6 +56,7 @@ export function activate(context: vscode.ExtensionContext) {
 	let disposable3 = vscode.commands.registerCommand(`${EXTENSION_NAME}.cleanalldiagnostics`, () => {
 		output.appendLine(`Clean All Diagnostics command is running...`);
 		diagnosticCollection.clear();
+		dataProvider.dataSource = undefined;
 		output.appendLine('Fnished Clean All Diagnostics command.');
 	});
 
@@ -58,12 +66,12 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let disposable5 = vscode.commands.registerCommand(`${EXTENSION_NAME}.reloaddiagnostics`, () => {
 		output.appendLine(`Reload Diagnostics command is running...`);
-		reloadAllDiagnostics(diagnosticCollection);
+		reloadAllDiagnostics(diagnosticCollection, dataProvider);
 		output.appendLine('Fnished Reload Diagnostics command.');
 	});
 
 	let disposable6 = vscode.commands.registerCommand(`${EXTENSION_NAME}.dupfinder.run`, () => {
-		new DupfinderExecutor(output, statusBarItem, dataProvider).run();
+		new DupfinderExecutor(output, statusBarItem, oldDataProvider).run();
 	});
 
 	let disposable7 = vscode.commands.registerCommand(`${EXTENSION_NAME}.dupfinder.show`, async (fragment1: Fragment, fragment2: Fragment) => {
@@ -89,10 +97,23 @@ export function activate(context: vscode.ExtensionContext) {
 		dataProvider.dataSource = undefined;
 	});
 
+	let disposable9 = vscode.commands.registerCommand(`${EXTENSION_NAME}.issue.show`, async (issue: Issue) => {
+		const textDocument = await vscode.workspace.openTextDocument(issue.fullPath);
+		const textEditor = await vscode.window.showTextDocument(textDocument);
+
+		const p11 = textDocument.positionAt(issue.offset.start);
+		const p12 = textDocument.positionAt(issue.offset.end);
+
+		textEditor.selection = new vscode.Selection(p11, p12);
+
+		textEditor.revealRange(textEditor.selection, vscode.TextEditorRevealType.InCenter);
+	});
+
 	context.subscriptions.push(
 		output,
 		statusBarItem,
 		tree,
+		oldTree,
 		disposableShowOutput,
 		disposable,
 		disposable2,
@@ -101,7 +122,8 @@ export function activate(context: vscode.ExtensionContext) {
 		disposable5,
 		disposable6,
 		disposable7,
-		disposable8
+		disposable8,
+		disposable9
 	);
 }
 

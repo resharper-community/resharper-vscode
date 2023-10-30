@@ -5,12 +5,14 @@ import { EXTENSION_NAME, INSPECTION_FILENAME, INSPECTION_COMMAND, NONZERO_RET_CO
 import { selectSolutionFile } from '../../utils/workspace';
 import { loadDiagnostics } from './diagnostics';
 import { Config } from '../config';
+import { InspectCodeTreeDataProvider } from './tree';
 
 export class InspectCodeExecutor {
 	constructor(
 		private readonly output: vscode.OutputChannel,
 		private readonly statusBarItem: vscode.StatusBarItem,
-		private readonly diagnosticCollection: vscode.DiagnosticCollection
+		private readonly diagnosticCollection: vscode.DiagnosticCollection,
+		private readonly dataProvider: InspectCodeTreeDataProvider
 	) { }
 
 	private showStatusBarItem(): void {
@@ -29,6 +31,7 @@ export class InspectCodeExecutor {
 
 	private executeInspectCode(filePath: string, xmlPath: string): void {
 		this.output.appendLine(`Inspect Code command is running for '${filePath}'...`);
+		const wd: string = path.dirname(filePath);
 
 		let args: Array<string> = [];
 		let config = Config.getConfig().inspectCodeConfig;
@@ -58,7 +61,10 @@ export class InspectCodeExecutor {
 			filePath
 		);
 
-		const cp = spawn(INSPECTION_COMMAND, args, { shell: true });
+		const cp = spawn(INSPECTION_COMMAND, args, {
+			cwd: wd,
+			shell: true
+		});
 
 		cp.stdin?.addListener('data', message => this.output.append(message.toString()));
 		cp.stdout?.addListener('data', message => this.output.append(message.toString()));
@@ -69,13 +75,12 @@ export class InspectCodeExecutor {
 				vscode.window.showErrorMessage(NONZERO_RET_CODE);
 				this.statusBarItem.hide();
 			} else {
-				const dirPath = path.dirname(filePath);
-
 				this.diagnosticCollection.clear();
-				loadDiagnostics(dirPath, this.diagnosticCollection);
+				var issues = loadDiagnostics(wd, this.diagnosticCollection);
+				this.dataProvider.dataSource = issues;
 
 				this.hideStatusBarItem();
-				this.output.appendLine('Fnished Inspect Code command.');
+				this.output.appendLine('Finished Inspect Code command.');
 			}
 		});
 	}

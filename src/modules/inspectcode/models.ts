@@ -8,6 +8,7 @@ export type File = {
 export type Issue = {
 	typeId: string;
 	file: string;
+	fullPath: string;
 	offset: Range;
 	line: number;
 	message: string;

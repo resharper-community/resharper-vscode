@@ -79,6 +79,10 @@
 		"views": {
 			"resharpervscode": [
 				{
+					"id": "resharpervscode.inspectcode",
+					"name": "Inspectcode"
+				},
+				{
 					"id": "resharpervscode.dupfinder",
 					"name": "Dupfinder"
 				}
@@ -87,28 +91,18 @@
 		"menus": {
 			"view/title": [
 				{
-					"command": "resharpervscode.dupfinder.run",
-					"when": "view == resharpervscode.dupfinder",
-					"group": "dupfinder"
-				},
-				{
-					"command": "resharpervscode.dupfinder.clean",
-					"when": "view == resharpervscode.dupfinder",
-					"group": "dupfinder"
-				},
-				{
 					"command": "resharpervscode.cleanupcode",
-					"when": "view == resharpervscode.dupfinder",
+					"when": "view == resharpervscode.inspectcode",
 					"group": "cleanupcode"
 				},
 				{
 					"command": "resharpervscode.inspectcode",
-					"when": "view == resharpervscode.dupfinder",
+					"when": "view == resharpervscode.inspectcode",
 					"group": "inspectcode"
 				},
 				{
 					"command": "resharpervscode.cleanalldiagnostics",
-					"when": "view == resharpervscode.dupfinder",
+					"when": "view == resharpervscode.inspectcode",
 					"group": "inspectcode"
 				}
 			]
