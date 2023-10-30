@@ -1,6 +1,6 @@
 import { spawn } from 'child_process';
 import * as vscode from 'vscode';
-import { EXTENSION_NAME, CLEANCODE_COMMAND, NO_SLN_WARN, NONZERO_RET_CODE } from '../../constants';
+import { EXTENSION_NAME, CLEANCODE_COMMAND, NO_SLN_WARN, NONZERO_RET_CODE, EXTENSION_DISPLAY_NAME } from '../../constants';
 import { selectSolutionFile } from '../../utils/workspace';
 import { Config } from "../config";
 
@@ -12,7 +12,7 @@ export class CleanupCodeExecutor {
 
 	private showStatusBarItem() {
 		this.statusBarItem.text = "$(sync~spin) Cleanup Code";
-		this.statusBarItem.tooltip = "R#: Cleaning up code";
+		this.statusBarItem.tooltip = `${EXTENSION_DISPLAY_NAME}: Cleaning up code`;
 		this.statusBarItem.command = `${EXTENSION_NAME}.showoutput`;
 		this.statusBarItem.show();
 	}

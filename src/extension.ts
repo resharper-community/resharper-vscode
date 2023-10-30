@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { EXTENSION_NAME } from './constants';
+import { EXTENSION_DISPLAY_NAME, EXTENSION_NAME } from './constants';
 import { reloadAllDiagnostics } from './modules/inspectcode/diagnostics';
 import { InspectCodeExecutor } from './modules/inspectcode/executor';
 import { CleanupCodeExecutor } from './modules/cleancode/executor';
@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const diagnosticCollection = vscode.languages.createDiagnosticCollection(EXTENSION_NAME);
 
-	const output = vscode.window.createOutputChannel(EXTENSION_NAME);
+	const output = vscode.window.createOutputChannel(EXTENSION_DISPLAY_NAME);
 	const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left);
 
 	const dataProvider = new DupfinderTreeDataProvider();

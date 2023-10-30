@@ -24,7 +24,8 @@
 		".NET Core",
 		"ASP.NET",
 		"dotnet",
-		"resharper"
+		"resharper",
+		"fakesharper"
 	],
 	"activationEvents": [
 		"workspaceContains:**/*.sln",
@@ -70,7 +71,7 @@
 			"activitybar": [
 				{
 					"id": "resharpervscode",
-					"title": "resharpervscode",
+					"title": "ReSharper VSCode",
 					"icon": "resources/icon/csharp.svg"
 				}
 			]
@@ -129,7 +130,7 @@
 							"SettingsPath": {
 								"type": "string",
 								"default": "",
-								"description": "Path to the file to use custom settings from (default: Use R#'s solution shared settings if exists)."
+								"description": "Path to the file to use custom settings from (default: Use ReSharper's solution shared settings if exists)."
 							},
 							"ProfileName": {
 								"type": "string",
@@ -226,7 +227,7 @@
 							"ProfilePath": {
 								"type": "string",
 								"default": "",
-								"description": "Path to the file to use custom settings from (default: Use R#'s solution shared settings if exists)."
+								"description": "Path to the file to use custom settings from (default: Use ReSharper's solution shared settings if exists)."
 							},
 							"Verbosity": {
 								"type": "string",

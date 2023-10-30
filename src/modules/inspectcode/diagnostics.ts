@@ -2,7 +2,7 @@ import * as fs from "fs";
 import { EOL } from "os";
 import * as path from "path";
 import * as vscode from "vscode";
-import { EXTENSION_NAME, INSPECTION_FILENAME } from "../../constants";
+import { EXTENSION_DISPLAY_NAME, INSPECTION_FILENAME } from "../../constants";
 import { readFileSync } from '../../utils/file';
 import { File } from "./models";
 import { getIssueRange, getIssueSeverity, restoreRelativePaths } from "./utils";
@@ -48,7 +48,7 @@ export function updateDiagnostics(files: File[], diagnosticCollection: vscode.Di
 			range: getIssueRange(data, issue),
 			severity: getIssueSeverity(issue),
 			code: issue.typeId,
-			source: EXTENSION_NAME
+			source: EXTENSION_DISPLAY_NAME
 		})));
 	}
 }

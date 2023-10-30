@@ -1,3 +1,4 @@
+export const EXTENSION_DISPLAY_NAME: string = "ReSharper VSCode";
 export const EXTENSION_NAME: string = "resharpervscode";
 export const INSPECTION_FILENAME: string = "inspectcode.xml";
 export const DUPFINDER_FILENAME: string = "dupfinder.xml";
