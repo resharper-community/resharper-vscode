@@ -7,7 +7,7 @@ import { IssueType, Issue, File } from "./models";
  * Parses xml file data to File model array
  * @param filePath Xml file path
  */
-export function parsefile(filePath: string): File[] {
+export function parseFile(filePath: string): File[] {
 	const dir = path.dirname(filePath);
 	const xml: string = file.readFileSync(filePath);
 

@@ -7,7 +7,7 @@ import { readFileSync } from '../../utils/file';
 import { File, Issue } from "./models";
 import { getIssueRange, getIssueSeverity, restoreRelativePaths } from "./utils";
 import { findFiles } from '../../utils/workspace';
-import { parsefile } from "./xmlparser";
+import { parseFile } from "./xmlparser";
 import { InspectCodeTreeDataProvider } from "./tree";
 
 export function reloadAllDiagnostics(diagnosticCollection: vscode.DiagnosticCollection, dataProvider: InspectCodeTreeDataProvider) {
@@ -31,7 +31,7 @@ export function loadDiagnostics(basePath: string, diagnosticCollection: vscode.D
 	}
 
 	try {
-		const files: File[] = parsefile(xmlPath);
+		const files: File[] = parseFile(xmlPath);
 		restoreRelativePaths(basePath, files);
 		updateDiagnostics(files, diagnosticCollection);
 		let issues: Issue[] = [];
@@ -40,7 +40,7 @@ export function loadDiagnostics(basePath: string, diagnosticCollection: vscode.D
 			issues.push(...file.issues);
 		}
 		return issues;
-	} catch (err) {
+	} catch (err: any) {
 		vscode.window.showErrorMessage(`${err?.message || err}`);
 		return [];
 	}

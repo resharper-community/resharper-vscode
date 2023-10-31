@@ -13,12 +13,16 @@
         "cleancode",
         "cleandiagnostics",
         "cleanupcode",
+        "dotnetcore",
+        "dotnetcoresdk",
         "inspectcode",
         "Jetbrains",
         "jetbrainsinstaller",
         "reloaddiagnostics",
         "resharpervscode",
         "showoutput",
-        "toolset"
+        "swea",
+        "toolset",
+        "xmlparser"
     ]
 }

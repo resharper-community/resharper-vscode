@@ -63,7 +63,7 @@ export class CleanupCodeExecutor {
 			}
 
 			this.hideStatusBarItem();
-			this.output.appendLine('Fnished Cleanup Code command.');
+			this.output.appendLine('Finished Cleanup Code command.');
 		});
 	}
 
