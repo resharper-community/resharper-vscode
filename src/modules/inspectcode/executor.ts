@@ -1,4 +1,4 @@
-import { spawn } from 'child_process';
+import { execSync, spawn } from 'child_process';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { EXTENSION_NAME, INSPECTION_FILENAME, INSPECTION_COMMAND, NONZERO_RET_CODE, NO_SLN_WARN } from '../../constants';
@@ -16,7 +16,7 @@ export class InspectCodeExecutor {
 	) { }
 
 	private showStatusBarItem(): void {
-		this.statusBarItem.text = "$(sync~spin) Inspect Code";
+		this.statusBarItem.text = "$(sync~spin) ReSharper: Inspect Code";
 		this.statusBarItem.tooltip = "Inspect Code command is running";
 		this.statusBarItem.command = `${EXTENSION_NAME}.showoutput`;
 		this.statusBarItem.show();
@@ -66,14 +66,17 @@ export class InspectCodeExecutor {
 			shell: true
 		});
 
-		cp.stdin?.addListener('data', message => this.output.append(message.toString()));
-		cp.stdout?.addListener('data', message => this.output.append(message.toString()));
-		cp.stderr?.addListener('data', message => this.output.append(message.toString()));
+		const inspectCodeOutput: string[] = [];
+		cp.stdin?.addListener('data', message => { const m = message.toString(); inspectCodeOutput.push(m); this.output.append(m); });
+		cp.stdout?.addListener('data', message => { const m = message.toString(); inspectCodeOutput.push(m); this.output.append(m); });
+		cp.stderr?.addListener('data', message => { const m = message.toString(); inspectCodeOutput.push(m); this.output.append(m); });
 
-		cp.on('exit', code => {
+		cp.on('exit', async code => {
 			if (code !== 0) {
-				vscode.window.showErrorMessage(NONZERO_RET_CODE);
 				this.statusBarItem.hide();
+				if (!await this.tryToFix(inspectCodeOutput)) {
+					vscode.window.showErrorMessage(NONZERO_RET_CODE);
+				}
 			} else {
 				this.diagnosticCollection.clear();
 				var issues = loadDiagnostics(wd, this.diagnosticCollection);
@@ -97,5 +100,39 @@ export class InspectCodeExecutor {
 			this.showStatusBarItem();
 			this.executeInspectCode(filePath, xmlPath);
 		});
+	}
+
+	private async tryToFix(inspectCodeOutput: string[]): Promise<boolean> {
+		let canFix = false;
+		if (inspectCodeOutput.find(m => m.indexOf("The SDK 'Microsoft.NET.SDK.WorkloadAutoImportPropsLocator' specified could not be found") >= 0)) {
+			canFix = true;
+		}
+
+		if (canFix)
+		{
+			let config = Config.getConfig().inspectCodeConfig;
+			if (!config.DotnetCoreSdk) {
+				let dotnetSdkVersion: string;
+				try{
+					dotnetSdkVersion = execSync(`dotnet --version`).toString().trim();
+				}
+				catch {
+					dotnetSdkVersion = '';
+				}
+
+				if (dotnetSdkVersion) {
+					const selection = await vscode.window.showErrorMessage('Failed to inspect code. It was probably because ReSharper cannot find the correct dotnet SDK version.', "Try To Fix", "Show Output");
+					if (selection === "Try To Fix") {
+						Config.getConfig().saveInspectCodeDotnetSdkConfig(dotnetSdkVersion);
+						vscode.commands.executeCommand(`${EXTENSION_NAME}.inspectcode`);
+					}
+					else if (selection === "Show Output") {
+						vscode.commands.executeCommand(`${EXTENSION_NAME}.showoutput`);
+					}
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 }

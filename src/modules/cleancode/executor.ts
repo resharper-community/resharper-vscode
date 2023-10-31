@@ -11,7 +11,7 @@ export class CleanupCodeExecutor {
 	) { }
 
 	private showStatusBarItem() {
-		this.statusBarItem.text = "$(sync~spin) Cleanup Code";
+		this.statusBarItem.text = "$(sync~spin) ReSharper: Cleanup Code";
 		this.statusBarItem.tooltip = `${EXTENSION_DISPLAY_NAME}: Cleaning up code`;
 		this.statusBarItem.command = `${EXTENSION_NAME}.showoutput`;
 		this.statusBarItem.show();

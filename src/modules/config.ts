@@ -22,4 +22,11 @@ export class Config {
         this.cleanupCodeConfig = config.get<CCCliOptions>("cleanupcode", this.cleanupCodeConfig);
         this.inspectCodeConfig = config.get<ICCliOptions>("inspectcode", this.inspectCodeConfig);
     }
+
+    saveInspectCodeDotnetSdkConfig(dotnetCoreSdk: string) {
+        let config = vscode.workspace.getConfiguration(EXTENSION_NAME);
+        this.inspectCodeConfig = config.get<ICCliOptions>("inspectcode", this.inspectCodeConfig);
+        this.inspectCodeConfig.DotnetCoreSdk = dotnetCoreSdk;
+        config.update("inspectcode", this.inspectCodeConfig);
+    }
 }
