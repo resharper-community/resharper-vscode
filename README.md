@@ -8,10 +8,6 @@ This extension is a fork of fakesharpersettings which is a fork of fakesharper
 
 ![example](https://raw.githubusercontent.com/resharper-community/resharper-vscode/master/assets/example.gif)
 
-## Dupfinder
-
-![example](https://raw.githubusercontent.com/resharper-community/resharper-vscode/master/assets/dupfinder.gif)
-
 ## Requirements
 
 * [ReSharper Command Line](https://www.jetbrains.com/resharper/features/command-line.html) tool:
@@ -27,8 +23,6 @@ This extension is a fork of fakesharpersettings which is a fork of fakesharper
 * `Clean All Diagnostics`: Clean all diagnostics on workspace.
 * `Reload Diagnostics`: Show diagnostics on editor from all found inspectcode.xml files.
 * `Cleanup Code`: Format and cleanup code.
-* `Run Dupfinder`: Find duplicates in code.
-* `Clean Duplicates`: Clean duplicates tree.
 
 ## FAQ
 

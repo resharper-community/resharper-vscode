@@ -57,14 +57,6 @@
 			{
 				"command": "resharpervscode.reloaddiagnostics",
 				"title": "Resharper: Reload Diagnostics"
-			},
-			{
-				"command": "resharpervscode.dupfinder.run",
-				"title": "Resharper: Run Dupfinder"
-			},
-			{
-				"command": "resharpervscode.dupfinder.clean",
-				"title": "Resharper: Clean Duplicates"
 			}
 		],
 		"viewsContainers": {
@@ -81,10 +73,6 @@
 				{
 					"id": "resharpervscode.inspectcode",
 					"name": "Inspectcode"
-				},
-				{
-					"id": "resharpervscode.dupfinder",
-					"name": "Dupfinder"
 				}
 			]
 		},
@@ -322,93 +310,6 @@
 								"type": "string",
 								"default": "",
 								"description": "Exclude files selected by provided wildcards from analysis (default: analyze all files in solution)."
-							}
-						}
-					},
-					"resharpervscode.dupfinder": {
-						"type": "object",
-						"default": {},
-						"description": "CLI args for code dupfinder",
-						"properties": {
-							"ConfigPath": {
-								"type": "string",
-								"default": "",
-								"description": "Path to configuration file here parameters are specified (use 'config-create' option to create sample file)"
-							},
-							"Verbosity": {
-								"type": "string",
-								"default": "",
-								"description": "Display this amount of information in the log",
-								"enum": [
-									"OFF",
-									"FATAL",
-									"ERROR",
-									"WARN",
-									"INFO",
-									"VERBOSE",
-									"TRACE"
-								]
-							},
-							"CachesHomePath": {
-								"type": "string",
-								"default": " Path to the directory where produced caches will be stored."
-							},
-							"MsBuildProperties": {
-								"type": "string",
-								"default": " MSBuild properties."
-							},
-							"Debug": {
-								"type": "boolean",
-								"default": "False",
-								"description": "Show debugging messages (default: False)."
-							},
-							"DiscardCost": {
-								"type": "number",
-								"description": "Complexity threshold for duplicate fragments. Code fragments with lower complexity are discarded (default: 70)."
-							},
-							"DiscardFields": {
-								"type": "boolean",
-								"description": "Discard similar fields with different names (default: False)."
-							},
-							"DiscardLiterals": {
-								"type": "boolean",
-								"description": "Discard similar lines of code with different literals (default: False)."
-							},
-							"DiscardLocalVars": {
-								"type": "boolean",
-								"description": "Discard similar local variables with different name (default: False)."
-							},
-							"DiscardTypes": {
-								"type": "boolean",
-								"description": "Discard similar types with different names (default: False)."
-							},
-							"IdlePriority": {
-								"type": "boolean",
-								"description": "Set process priority to idle."
-							},
-							"ExcludeByComment": {
-								"type": "array",
-								"description": "Keywords to exclude files that contain the keyword in a file's opening comments."
-							},
-							"ExcludeCodeRegions": {
-								"type": "array",
-								"description": "keywords that exclude regions that contain the keyword in the message substring. (e.g. \"generated code\" will exclude regions containing \"Windows Form Designer generated code\"."
-							},
-							"Exclude": {
-								"type": "string",
-								"description": "Exclude files by pattern."
-							},
-							"NormalizeTypes": {
-								"type": "boolean",
-								"description": "Normalize type names to the last subtype (default: False) (default: False)."
-							},
-							"ShowStats": {
-								"type": "boolean",
-								"description": "Show resources usage statistics (CPU and memory)."
-							},
-							"ShowText": {
-								"type": "boolean",
-								"description": "Show duplicates text in report."
 							}
 						}
 					}

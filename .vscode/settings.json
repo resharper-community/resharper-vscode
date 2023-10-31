@@ -9,6 +9,16 @@
     // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
     "typescript.tsc.autoDetect": "off",
     "cSpell.words": [
-        "resharpervscode"
+        "cleanalldiagnostics",
+        "cleancode",
+        "cleandiagnostics",
+        "cleanupcode",
+        "inspectcode",
+        "Jetbrains",
+        "jetbrainsinstaller",
+        "reloaddiagnostics",
+        "resharpervscode",
+        "showoutput",
+        "toolset"
     ]
 }
