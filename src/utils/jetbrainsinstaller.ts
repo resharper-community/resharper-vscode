@@ -24,8 +24,8 @@ export class JetBrainsInstaller {
 			const output = execSync(JB_INSTALLATION_COMMAND).toString();
 			this.output.append(output);
 			this.output.appendLine('Done.');
-		} catch (error: any) {
-			this.output.append(error.toString());
+		} catch (error) {
+			this.output.append((error as any).toString());
 		}
 	}
 }

@@ -40,8 +40,8 @@ export function loadDiagnostics(basePath: string, diagnosticCollection: vscode.D
 			issues.push(...file.issues);
 		}
 		return issues;
-	} catch (err: any) {
-		vscode.window.showErrorMessage(`${err?.message || err}`);
+	} catch (err) {
+		vscode.window.showErrorMessage(`${(err as any)?.message || err}`);
 		return [];
 	}
 }
