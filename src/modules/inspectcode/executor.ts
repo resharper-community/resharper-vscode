@@ -61,6 +61,7 @@ export class InspectCodeExecutor {
 			filePath
 		);
 
+		this.output.appendLine(`${INSPECTION_COMMAND} ${args.filter(x => x.length > 0).join(' ')}`);
 		const cp = spawn(INSPECTION_COMMAND, args, {
 			cwd: wd,
 			shell: true

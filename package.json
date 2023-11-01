@@ -3,7 +3,7 @@
 	"publisher": "dev-land",
 	"displayName": "Resharper VSCode",
 	"description": "ReSharper features for Visual Studio Code",
-	"version": "0.9.3",
+	"version": "0.9.4",
 	"preview": true,
 	"icon": "assets/icon.png",
 	"repository": {
@@ -103,6 +103,7 @@
 						"type": "object",
 						"default": {},
 						"description": "CLI args for code cleanup",
+						"additionalProperties": false,
 						"properties": {
 							"ConfigPath": {
 								"type": "string",
@@ -200,6 +201,7 @@
 						"type": "object",
 						"default": {},
 						"description": "CLI args for code inspection",
+						"additionalProperties": false,
 						"properties": {
 							"ConfigPath": {
 								"type": "string",
