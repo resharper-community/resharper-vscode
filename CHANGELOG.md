@@ -2,6 +2,9 @@
 
 All notable changes to the "resharper-vscode" extension will be documented in this file.
 
+## 0.9.4
+* Print the command before running JB tool
+
 ## 0.9.3
 * Remove dupfiles which is not support by JetBrains anymore
 * If InspectCode cannot find the correct dotnet SDK version, the extension can auto-fix the problem for users
