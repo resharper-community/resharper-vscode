@@ -30,6 +30,8 @@ export class InspectCodeExecutor {
 	}
 
 	private executeInspectCode(filePath: string, xmlPath: string): void {
+		vscode.commands.executeCommand('setContext', 'resharpervscode:hideWelcome', true);
+
 		this.output.appendLine(`Inspect Code command is running for '${filePath}'...`);
 		const wd: string = path.dirname(filePath);
 

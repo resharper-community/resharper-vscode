@@ -1,9 +1,9 @@
 {
 	"name": "resharpervscode",
 	"publisher": "dev-land",
-	"displayName": "Resharper VSCode",
+	"displayName": "ReSharper VSCode",
 	"description": "ReSharper features for Visual Studio Code",
-	"version": "0.9.4",
+	"version": "0.9.5",
 	"preview": true,
 	"icon": "assets/icon.png",
 	"repository": {
@@ -40,23 +40,23 @@
 		"commands": [
 			{
 				"command": "resharpervscode.inspectcode",
-				"title": "Resharper: Inspect Code"
+				"title": "ReSharper: Inspect Code"
 			},
 			{
 				"command": "resharpervscode.cleandiagnostics",
-				"title": "Resharper: Clean Diagnostics"
+				"title": "ReSharper: Clean Diagnostics"
 			},
 			{
 				"command": "resharpervscode.cleanalldiagnostics",
-				"title": "Resharper: Clean All Diagnostics"
+				"title": "ReSharper: Clean All Diagnostics"
 			},
 			{
 				"command": "resharpervscode.cleanupcode",
-				"title": "Resharper: Cleanup Code"
+				"title": "ReSharper: Cleanup Code"
 			},
 			{
 				"command": "resharpervscode.reloaddiagnostics",
-				"title": "Resharper: Reload Diagnostics"
+				"title": "ReSharper: Reload Diagnostics"
 			}
 		],
 		"viewsContainers": {
@@ -64,7 +64,7 @@
 				{
 					"id": "resharpervscode",
 					"title": "ReSharper VSCode",
-					"icon": "resources/icon/csharp.svg"
+					"icon": "assets/icon.svg"
 				}
 			]
 		},
@@ -76,6 +76,13 @@
 				}
 			]
 		},
+		"viewsWelcome": [
+			{
+			  "view": "resharpervscode.inspectcode",
+			  "contents": "You can start to inspect code.\n[Inspect Code](command:resharpervscode.inspectcode)",
+			  "when": "!resharpervscode:hideWelcome"
+			}
+		],
 		"menus": {
 			"view/title": [
 				{
