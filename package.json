@@ -3,7 +3,7 @@
 	"publisher": "dev-land",
 	"displayName": "ReSharper VSCode",
 	"description": "ReSharper features for Visual Studio Code",
-	"version": "0.9.5",
+	"version": "0.9.6",
 	"preview": true,
 	"icon": "assets/icon.png",
 	"repository": {
