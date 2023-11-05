@@ -8,6 +8,8 @@ import { Config } from '../config';
 import { InspectCodeTreeDataProvider } from './tree';
 
 export class InspectCodeExecutor {
+	private progressResolve: null | ((value: void | PromiseLike<void>) => void) = null;
+
 	constructor(
 		private readonly output: vscode.OutputChannel,
 		private readonly statusBarItem: vscode.StatusBarItem,
@@ -20,6 +22,17 @@ export class InspectCodeExecutor {
 		this.statusBarItem.tooltip = "Inspect Code command is running";
 		this.statusBarItem.command = `${EXTENSION_NAME}.showoutput`;
 		this.statusBarItem.show();
+
+		vscode.window.withProgress(
+			{ location: { viewId: `${EXTENSION_NAME}.inspectcode` } },
+			(_, __) =>
+			{
+				const p = new Promise<void>(resolve => {
+					this.progressResolve = resolve;
+				});
+				return p;
+			}
+		);
 	};
 
 	private hideStatusBarItem(): void {
@@ -27,6 +40,10 @@ export class InspectCodeExecutor {
 		this.statusBarItem.tooltip = undefined;
 		this.statusBarItem.command = undefined;
 		this.statusBarItem.hide();
+
+		if (this.progressResolve) {
+			this.progressResolve();
+		}
 	}
 
 	private executeInspectCode(filePath: string, xmlPath: string): void {

@@ -11,7 +11,8 @@ export class IssueTreeItem extends vscode.TreeItem {
 		public readonly issue: Issue | undefined
 	) {
 		super(issue === undefined ? `${issueGroup.issueType.id} (${issueGroup.issues.length})` : `${path.basename(issue.file)}`, collapsibleState);
-		this.description = this.issue === undefined ? '' : path.dirname(this.issue.file);
+		const dirname = this.issue === undefined ? '' : path.dirname(this.issue.file);
+		this.description = dirname === '.' ? '' : dirname;
 		this.tooltip = this.issue === undefined ? this.issueGroup.issueType.description : `Line: ${this.issue.line} (${this.issue.offset.start}, ${this.issue.offset.end})`;
 	}
 }

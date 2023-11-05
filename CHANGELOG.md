@@ -2,6 +2,11 @@
 
 All notable changes to the "resharper-vscode" extension will be documented in this file.
 
+## 0.9.7
+* Show progress in the InspectCode window
+* Improve the issue tree view
+* New icon on the Activity bar
+
 ## 0.9.4
 * Print the command before running JB tool
 
