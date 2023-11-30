@@ -1,4 +1,4 @@
-# ReSharper VSCode
+# ReSharper Runner
 
 This extension provides a wrapper for the ReSharper CLI. The CLI executables are available as commands in the command pallette and any command line arguments can be configurable from the VS Code config files.
 

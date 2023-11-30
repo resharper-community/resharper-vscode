@@ -2,8 +2,8 @@
 	"name": "resharpervscode",
 	"publisher": "dev-land",
 	"displayName": "ReSharper Runner",
-	"description": "ReSharper features for Visual Studio Code",
-	"version": "0.9.8",
+	"description": "Provides ReSharper features for Visual Studio Code",
+	"version": "0.9.9",
 	"preview": true,
 	"icon": "assets/icon.png",
 	"repository": {
