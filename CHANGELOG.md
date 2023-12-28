@@ -2,6 +2,11 @@
 
 All notable changes to the "resharper-vscode" extension will be documented in this file.
 
+## 0.9.11
+* Add icons to issue tree
+* Show "Inspect Code" button again after cleanup diagnostics
+* Upgrade packages
+
 ## 0.9.7
 * Show progress in the InspectCode window
 * Improve the issue tree view

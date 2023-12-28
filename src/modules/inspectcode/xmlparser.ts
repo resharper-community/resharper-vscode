@@ -11,11 +11,12 @@ export function parseFile(filePath: string): File[] {
 	const dir = path.dirname(filePath);
 	const xml: string = file.readFileSync(filePath);
 
-	const json: any = fxp.parse(xml, {
-		attrNodeName: 'attributes',
+	const parser = new fxp.XMLParser({
+		attributesGroupName: 'attributes',
 		ignoreAttributes: false,
 		parseAttributeValue: true
 	});
+	const json: any = parser.parse(xml);
 
 	const fileIssueLists: File[] = [];
 	const issueTypes: IssueType[] = [];

@@ -49,6 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
 		diagnosticCollection.clear();
 		dataProvider.dataSource = undefined;
 		output.appendLine('Finished Clean All Diagnostics command.');
+		vscode.commands.executeCommand('setContext', 'resharpervscode:hideWelcome', false);
 	});
 
 	let disposable4 = vscode.commands.registerCommand(`${EXTENSION_NAME}.cleanupcode`, () => {

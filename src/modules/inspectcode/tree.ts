@@ -12,6 +12,22 @@ export class IssueTreeItem extends vscode.TreeItem {
 	) {
 		super(issue === undefined ? `${issueGroup.issueType.id} (${issueGroup.issues.length})` : `${path.basename(issue.file)}`, collapsibleState);
 		const dirname = this.issue === undefined ? '' : path.dirname(this.issue.file);
+		let icon: vscode.ThemeIcon | undefined;
+		if (!issue) {
+			switch (issueGroup.issueType.severity)
+			{
+				case 'ERROR':
+					icon = new vscode.ThemeIcon('error');
+					break;
+				case 'WARNING':
+					icon = new vscode.ThemeIcon('warning');
+					break;
+				default:
+					icon = new vscode.ThemeIcon('info');
+					break;
+			};
+		}
+		this.iconPath = icon;
 		this.description = dirname === '.' ? '' : dirname;
 		this.tooltip = this.issue === undefined ? this.issueGroup.issueType.description : `Line: ${this.issue.line} (${this.issue.offset.start}, ${this.issue.offset.end})`;
 	}
