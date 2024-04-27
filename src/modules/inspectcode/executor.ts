@@ -76,8 +76,8 @@ export class InspectCodeExecutor {
 			(config.TargetForReference) ? `--targets-for-references=${config.TargetForReference}` : "",
 			(config.TargetsForItems) ? `--targets-for-items=${config.TargetsForItems}` : "",
 			(config.Extensions) ? `-x=${config.Extensions}` : "",
-			`--output=${xmlPath}`,
-			filePath
+			`--output="${xmlPath}"`,
+			`"${filePath}"`
 		);
 
 		this.output.appendLine(`${INSPECTION_COMMAND} ${args.filter(x => x.length > 0).join(' ')}`);

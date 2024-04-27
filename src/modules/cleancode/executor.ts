@@ -48,7 +48,7 @@ export class CleanupCodeExecutor {
 			(config.TargetForReference) ? `--targets-for-references=${config.TargetForReference}` : "",
 			(config.TargetsForItems) ? `--targets-for-items=${config.TargetsForItems}` : "",
 			(config.Extensions) ? `-x=${config.Extensions}` : "",
-			filePath
+			`"${filePath}"`
 		);
 
 		this.output.appendLine(`${CLEANCODE_COMMAND} ${args.filter(x => x.length > 0).join(' ')}`);
