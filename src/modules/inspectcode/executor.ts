@@ -76,6 +76,7 @@ export class InspectCodeExecutor {
 			(config.TargetForReference) ? `--targets-for-references=${config.TargetForReference}` : "",
 			(config.TargetsForItems) ? `--targets-for-items=${config.TargetsForItems}` : "",
 			(config.Extensions) ? `-x=${config.Extensions}` : "",
+			'-f="xml"',
 			`--output="${xmlPath}"`,
 			`"${filePath}"`
 		);
