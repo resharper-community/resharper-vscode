@@ -2,6 +2,9 @@
 
 All notable changes to the "resharper-vscode" extension will be documented in this file.
 
+## 0.9.15
+* Enhancement: [Make the link in the problem view clickable](https://github.com/resharper-community/resharper-vscode/issues/5)
+
 ## 0.9.13
 * Support Resharper CLI 2024.1.1
 * Bugfix: [Solution files containing spaces are not correctly escaped](https://github.com/resharper-community/resharper-vscode/issues/2)
