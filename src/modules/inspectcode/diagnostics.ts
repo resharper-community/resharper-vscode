@@ -9,6 +9,7 @@ import { getIssueRange, getIssueSeverity, restoreRelativePaths } from "./utils";
 import { findFiles } from '../../utils/workspace';
 import { parseFile } from "./xmlparser";
 import { InspectCodeTreeDataProvider } from "./tree";
+import { Uri } from "vscode";
 
 export function reloadAllDiagnostics(diagnosticCollection: vscode.DiagnosticCollection, dataProvider: InspectCodeTreeDataProvider) {
 	findFiles(`**/${INSPECTION_FILENAME}`)
@@ -54,10 +55,10 @@ export function updateDiagnostics(files: File[], diagnosticCollection: vscode.Di
 		const uri: vscode.Uri = vscode.Uri.file(file.path);
 
 		diagnosticCollection.set(uri, file.issues.map(issue => ({
-			message: issue.message + (issue.issueType.wikiUrl ? EOL + issue.issueType.wikiUrl : ''),
+			message: issue.message + EOL,
 			range: getIssueRange(data, issue),
 			severity: getIssueSeverity(issue),
-			code: issue.typeId,
+			code: issue.issueType.wikiUrl ? { value: issue.issueType.wikiUrl, target: Uri.parse(issue.issueType.wikiUrl) } : issue.typeId,
 			source: EXTENSION_DISPLAY_NAME
 		})));
 	}
